@@ -4,7 +4,7 @@
 /* UP - 0, DOWN - 1 */
 #include "node.h"   /* Node Definition */
 #include "proc.h"   /* Procedure Types/Nums */
-#include <stdio.h>
+//#include <stdio.h>
 
 #define CONST_m1 10000
 #define CONST_b 31415821
@@ -34,7 +34,7 @@ void InOrder(HANDLE *h) {
     InOrder(l);
     static unsigned char counter = 0;
     if (counter++ == 0)   /* reduce IO */
-      printf("%d @ 0x%x\n",h->value, 0);
+      //printf("%d @ 0x%x\n",h->value, 0);
     InOrder(r);
   }
 }
@@ -122,7 +122,7 @@ int lval, rval;
   r->right = lr;
   l->right = rr;
   l->value = rval;
-  /*printf("Swap Val Right l 0x%x,r 0x%x val: %d %d\n",l,r,lval,rval);*/
+  /*//printf("Swap Val Right l 0x%x,r 0x%x val: %d %d\n",l,r,lval,rval);*/
 } 
 
 int
@@ -141,7 +141,7 @@ int spr_val,dir;
   int rv,lv;
 
 
-  /*printf("enter bimerge %x\n", root);*/
+  /*//printf("enter bimerge %x\n", root);*/
   rv = root->value;
 
   pl = root->left;
@@ -155,7 +155,7 @@ int spr_val,dir;
   
   while ((pl != NIL))
     {
-      /*printf("pl = 0x%x,pr = 0x%x\n",pl,pr);*/
+      /*//printf("pl = 0x%x,pr = 0x%x\n",pl,pr);*/
       lv = pl->value;        /* <------- 8.2% load penalty */
       pll = pl->left;
       plr = pl->right;       /* <------- 1.35% load penalty */
@@ -196,7 +196,7 @@ int spr_val,dir;
       root->value=Bimerge(rl,value,dir);
       spr_val=Bimerge(rr,spr_val,dir);
     }
-  /*printf("exit bimerge %x\n", root);*/
+  /*//printf("exit bimerge %x\n", root);*/
   return spr_val;
 } 
 
@@ -210,7 +210,7 @@ int spr_val,dir;
 { HANDLE *l;
   HANDLE *r;
   int val;
-  /*printf("bisort %x\n", root);*/
+  /*//printf("bisort %x\n", root);*/
   if ((root->left == NIL))  /* <---- 8.7% load penalty */
     { 
      if (((root->value > spr_val) ^ dir))
@@ -226,49 +226,49 @@ int spr_val,dir;
       l = root->left;
       r = root->right;
       val = root->value;
-      /*printf("root 0x%x, l 0x%x, r 0x%x\n", root,l,r);*/
+      /*//printf("root 0x%x, l 0x%x, r 0x%x\n", root,l,r);*/
       root->value=Bisort(l,val,dir);
       ndir = !dir;
       spr_val=Bisort(r,spr_val,ndir);
       spr_val=Bimerge(root,spr_val,dir);
     }
-  /*printf("exit bisort %x\n", root);*/
+  /*//printf("exit bisort %x\n", root);*/
   return spr_val;
 } 
 
-int main(int argc, char **argv) {
+int main() {
   HANDLE *h;
   int sval;
   int n;
    
-  n = dealwithargs(argc,argv);
+  n = dealwithargs();
 
-  printf("Bisort with %d size of dim %d\n", n, NDim);
+  //printf("Bisort with %d size of dim %d\n", n, NDim);
 
   h = RandTree(n,12345768,0,0);
   sval = random(245867) % RANGE;
   if (flag) {
     InOrder(h);
-    printf("%d\n",sval);
+    //printf("%d\n",sval);
   }
-  printf("**************************************\n");
-  printf("BEGINNING BITONIC SORT ALGORITHM HERE\n");
-  printf("**************************************\n");
+  //printf("**************************************\n");
+  //printf("BEGINNING BITONIC SORT ALGORITHM HERE\n");
+  //printf("**************************************\n");
 
   sval=Bisort(h,sval,0);
 
   if (flag) {
-    printf("Sorted Tree:\n"); 
+    //printf("Sorted Tree:\n"); 
     InOrder(h);
-    printf("%d\n",sval);
+    //printf("%d\n",sval);
   }
 
   sval=Bisort(h,sval,1);
 
   if (flag) {
-    printf("Sorted Tree:\n"); 
+    //printf("Sorted Tree:\n"); 
     InOrder(h);
-    printf("%d\n",sval);
+    //printf("%d\n",sval);
   }
 
   return 0;
