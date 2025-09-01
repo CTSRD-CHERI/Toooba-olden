@@ -3,7 +3,7 @@
 echo $(dirname $0)
 
 # bh bisort em3d health mst perimeter power treeadd tsp utils voronoi
-for PROG in bisort
+for PROG in bh bisort em3d health perimeter power treeadd tsp
 do
 	echo "Building olden benchmark $(dirname $0)/$PROG"
 	cd $(dirname $0)/$PROG

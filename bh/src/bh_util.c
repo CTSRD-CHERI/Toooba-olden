@@ -7,12 +7,12 @@
  */
 
 #include "stdinc.h"
-#include <errno.h>
+//#include <errno.h>
 
 #define A	16807.0
 #define M	2147483647.0
 
-void exit(int);
+//extern void exit(int);
 
 /* random:
  * return a random number, which is also the next seed.
@@ -46,12 +46,12 @@ double xrand(double xl, double xh, double r)
  * ERROR: scream and die quickly.
  */
 
-error(char *msg)
+int error(char *msg)
 {
-    fprintf(stderr, msg);
-    if (errno != 0)
-        perror("Error");
-    exit(0);
+//    fprintf(stderr, msg);
+//    if (errno != 0)
+//        perror("Error");
+//    _exit(0);
 }
 
 

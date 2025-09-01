@@ -20,6 +20,12 @@
 extern int NumNodes;
 #endif
 
+extern int NumNodes;
+int chatting(const unsigned char *, ...);
+int isnan(int);
+#define RETEST();
+#define NOTEST();
+#define PID(int) 0
 
 #include "stdinc.h"
 
@@ -237,10 +243,10 @@ typedef struct {
 #define TASKLIMIT 256
 extern int nbody;
 
-#ifndef TORONTO
-#include "future-cell.h"
-#define exit __ShutDown
-#endif
+//#ifndef TORONTO
+//#include "future-cell.h"
+//#define exit __ShutDown
+//#endif
 
 
 

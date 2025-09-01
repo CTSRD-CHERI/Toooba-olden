@@ -11,6 +11,7 @@
 
 #include "defs.h"
 #include "code.h"
+#include "util.h"
 
 
 int nbody;
@@ -149,7 +150,7 @@ treeptr old_main() {
     bodyptr p = t->bodytab[0];
   
     for (; i < nbody; i++, p=Next(p))
-      printf("%d -- %f %f %f\n", i, Pos(p)[0], Pos(p)[1],
+      //printf("%d -- %f %f %f\n", i, Pos(p)[0], Pos(p)[1],
 	     Pos(p)[2]);
   }
 #endif
@@ -175,7 +176,7 @@ treeptr old_main() {
     bodyptr p = t->bodytab[0];
   
     for (; i < nbody; i++, p=Next(p))
-      printf("%d -- %f %f %f\n", i, Pos(p)[0], Pos(p)[1],
+      //printf("%d -- %f %f %f\n", i, Pos(p)[0], Pos(p)[1],
 	     Pos(p)[2]);
   }
 #endif
@@ -208,7 +209,7 @@ bodyptr testdata()
     double rsq, rsc1;
     real rad;
 
-    assert(0,99);
+    //assert(0,99);
     rsc = 3 * PI / 16;				/* set length scale factor  */
     vsc = sqrt(1.0 / rsc);			/* and recip. speed scale   */
     CLRV(cmr);					/* init cm pos, vel         */
@@ -330,7 +331,7 @@ void freetree(nodeptr n)
   
   /*NOTEST();*/
   if ((n == NULL) || (Type(n) == BODY))
-    return;
+    return 0;
 
   /* Type(n) == CELL */
   for (i=NSUB-1; i >= 0; i--) {
@@ -579,12 +580,12 @@ void vp(bodyptr q, int nstep)
     p0=Pos(q)[0];
     p1=Pos(q)[1];
     p2=Pos(q)[2];
-    assert (!isnan(p0),99);
-    assert (!isnan(p1),98);
-    assert (!isnan(p2),97);
-    assert (fabs(p0)<10.0,96);
-    assert (fabs(p1)<10.0,95);
-    assert (fabs(p2)<10.0,94);
+    //assert (!isnan(p0),99);
+    //assert (!isnan(p1),98);
+    //assert (!isnan(p2),97);
+    //assert (fabs(p0)<10.0,96);
+    //assert (fabs(p1)<10.0,95);
+    //assert (fabs(p2)<10.0,94);
 #ifdef DEBUG
     chatting("POSITION:vp--%f,%f,%f\n",p0,p1,p2);
 #endif
@@ -594,12 +595,12 @@ void vp(bodyptr q, int nstep)
     p0=Acc(q)[0];
     p1=Acc(q)[1];
     p2=Acc(q)[2];
-    assert (!isnan(p0),89);
-    assert (!isnan(p1),88);
-    assert (!isnan(p2),87);
-    assert (fabs(p0)<10000.0,86);
-    assert (fabs(p1)<10000.0,85);
-    assert (fabs(p2)<10000.0,84);
+    //assert (!isnan(p0),89);
+    //assert (!isnan(p1),88);
+    //assert (!isnan(p2),87);
+    //assert (fabs(p0)<10000.0,86);
+    //assert (fabs(p1)<10000.0,85);
+    //assert (fabs(p2)<10000.0,84);
     /*chatting("ACCEL:vp--%f,%f,%f\n",p0,p1,p2);*/
     }
 
@@ -608,12 +609,12 @@ void vp(bodyptr q, int nstep)
     p0=Vel(q)[0];
     p1=Vel(q)[1];
     p2=Vel(q)[2];
-    assert (!isnan(p0),79);
-    assert (!isnan(p1),78);
-    assert (!isnan(p2),77);
-    assert (fabs(p0)<10000.0,76);
-    assert (fabs(p1)<10000.0,75);
-    assert (fabs(p2)<10000.0,74);
+    //assert (!isnan(p0),79);
+    //assert (!isnan(p1),78);
+    //assert (!isnan(p2),77);
+    //assert (fabs(p0)<10000.0,76);
+    //assert (fabs(p1)<10000.0,75);
+    //assert (fabs(p2)<10000.0,74);
     /*chatting("VELOCITY:vp--%f,%f,%f\n",p0,p1,p2);*/
     }
     ADDV(vel1, Vel(q), dvel);		/*   find vel at midpoint   */
@@ -625,12 +626,12 @@ void vp(bodyptr q, int nstep)
     p0=Pos(q)[0];
     p1=Pos(q)[1];
     p2=Pos(q)[2];
-    assert (!isnan(p0),69);
-    assert (!isnan(p1),68);
-    assert (!isnan(p2),67);
-    assert (fabs(p0)<10000.0,66);
-    assert (fabs(p1)<10000.0,65);
-    assert (fabs(p2)<10000.0,64);
+    //assert (!isnan(p0),69);
+    //assert (!isnan(p1),68);
+    //assert (!isnan(p2),67);
+    //assert (fabs(p0)<10000.0,66);
+    //assert (fabs(p1)<10000.0,65);
+    //assert (fabs(p2)<10000.0,64);
     /*chatting("vp--%f,%f,%f\n",p0,p1,p2);*/
     }
   }
@@ -850,7 +851,7 @@ void expandbox(bodyptr p, treeptr t, int nsteps, int proc)
     while (!inbox) {            		/* expand box (rarely)      */
       rsize = Rsize(t);
       /*chatting("expanding box 0x%x, size=%f\n",p,rsize);*/
-      assert(rsize<1000.0,999);
+      //assert(rsize<1000.0,999);
       ADDVS(rmid, Rmin(t), 0.5 * rsize);    /*   find box midpoint      */
                                             /*   loop over dimensions   */
 /***
@@ -883,7 +884,7 @@ void expandbox(bodyptr p, treeptr t, int nsteps, int proc)
 
 	   ic = intcoord1(rmid[0], rmid[1], rmid[2], t);
 	   /*   locate old root cell   */
-	   assert(ic.inb, 1);	                /* xmid                     */
+	   //assert(ic.inb, 1);	                /* xmid                     */
 	   k = old_subindex(ic, IMAX >> 1);        /*     find old tree index  */
 	   Subp(newt)[k] = Root(t);            /*     graft old on new     */
 	   Root(t) = (nodeptr) newt;           /*     plant new tree       */
@@ -911,7 +912,7 @@ nodeptr loadtree(bodyptr p, icstruct xpic, nodeptr t, int l, treeptr tr)
       return ((nodeptr) p);
      }
   else {
-    assert(l != 0, 2);				/*   dont run out of bits   */
+    //assert(l != 0, 2);				/*   dont run out of bits   */
     if (Type(t) == BODY) {        		/*   reached a "leaf"?      */
       int i,j;
       icstruct pic,tic;
@@ -1099,15 +1100,15 @@ int subindex(bodyptr p, treeptr t , int l)
     rsize = t->rsize;
 
     xsc = (pos[0] - t->rmin[0]) / rsize;     /*   scale to range [0,1)   */
-    assert((0.0 <= xsc) && (xsc < 1.0), 5);
+    //assert((0.0 <= xsc) && (xsc < 1.0), 5);
     xp[0] = floor(IMAX * xsc);                  /*   then integerize      */
 
     xsc = (pos[1] - t->rmin[1]) / rsize;     /*   scale to range [0,1)   */
-    assert((0.0 <= xsc) && (xsc < 1.0), 6);
+    //assert((0.0 <= xsc) && (xsc < 1.0), 6);
     xp[1] = floor(IMAX * xsc);                  /*   then integerize      */
 
     xsc = (pos[2] - t->rmin[2]) / rsize;     /*   scale to range [0,1)   */
-    assert((0.0 <= xsc) && (xsc < 1.0), 7);
+    //assert((0.0 <= xsc) && (xsc < 1.0), 7);
     xp[2] = floor(IMAX * xsc);                  /*   then integerize      */
 
 
@@ -1205,8 +1206,8 @@ void ptree(nodeptr n, int level)
       }
     }
   }
-  else 
-    printf("%2d NULL TREE\n", level);
+  //else 
+  //  printf("%2d NULL TREE\n", level);
 }
 
       

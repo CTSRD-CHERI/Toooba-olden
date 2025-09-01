@@ -19,13 +19,13 @@
 #endif
 
 #include <math.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 /*
  * STREAM: a replacement for FILE *.
  */
 
-typedef FILE *stream;
+//typedef FILE *stream;
 
 /*
  * NULL: denotes a pointer to no object.
