@@ -5,9 +5,10 @@
  *           To be used with health.c                               *
  ********************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 #include "health.h"
+#include "util.h"
 
 void addList(struct List *list, struct Patient *patient) {
   struct List *b;
