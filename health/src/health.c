@@ -4,15 +4,16 @@
  *  Health.c : Model of the Columbian Health Care System           *
  *******************************************************************/ 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <math.h>
 #include "health.h"
-#include <assert.h>
+//#include <assert.h>
+#include "util.h"
 
 int  max_level;
 long max_time;
-long long seed;
+long long my_seed;
 
 struct Village *alloc_tree(int level, int label, struct Village *back) {
   if (level == 0)
@@ -29,7 +30,7 @@ struct Village *alloc_tree(int level, int label, struct Village *back) {
 
     new->back = back;
     new->label = label;
-    new->seed = label * (IQ + seed); 
+    new->seed = label * (IQ + my_seed); 
     new->hosp.personnel = (int)pow(2, level - 1);
     new->hosp.free_personnel = new->hosp.personnel;
     new->hosp.num_waiting_patients = 0;
@@ -215,37 +216,37 @@ struct Patient *generate_patient(struct Village *village)
   return NULL; 
 }
 
-int main(int argc, char *argv[]) 
+int main() 
 { 
   struct Results         results;
   struct Village         *top = 0;
   int                    i;
   float total_time, total_patients, total_hosps;  
   
-  dealwithargs(argc, argv);
+  dealwithargs();
   top = alloc_tree(max_level, 0, top);
   
-  chatting("\n\n    Columbian Health Care Simulator\n\n");
-  chatting("Working...\n");
+  //chatting("\n\n    Columbian Health Care Simulator\n\n");
+  //chatting("Working...\n");
   
   for (i = 0; i < max_time; i++) {
-    if ((i % 50) == 0) chatting("%d\n", i);
+    //if ((i % 50) == 0) chatting("%d\n", i);
     sim(top);
   }                          /* :) adt_pf detected */
   
-  printf("Getting Results\n");
+  //printf("Getting Results\n");
   results = get_results(top);              /* :) adt_pf detected */
   total_patients = results.total_patients;
   total_time = results.total_time;
   total_hosps = results.total_hosps;
 
-  chatting("Done.\n\n");
-  chatting("# of people treated:              %f people\n",
-	   total_patients);
-  chatting("Average length of stay:           %0.2f time units\n", 
-	   total_time / total_patients);
-  chatting("Average # of hospitals visited:   %f hospitals\n\n",
-	   total_hosps / total_patients);
+  //chatting("Done.\n\n");
+  //chatting("# of people treated:              %f people\n",
+	//   total_patients);
+  //chatting("Average length of stay:           %0.2f time units\n", 
+	//   total_time / total_patients);
+  //chatting("Average # of hospitals visited:   %f hospitals\n\n",
+	//   total_hosps / total_patients);
 
   return 0;
 }

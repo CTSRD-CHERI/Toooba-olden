@@ -8,10 +8,10 @@
 #ifndef _HEALTH
 #define _HEALTH
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 
-#define chatting printf
+//#define //chatting printf
 
 #define IA 16807
 #define IM 2147483647
@@ -22,7 +22,7 @@
 
 extern int  max_level;
 extern long max_time;
-extern long long seed;
+extern long long my_seed;
 
 struct Results {
   float                   total_patients;
@@ -82,7 +82,7 @@ struct Village {
 };
 
 struct Village *alloc_tree(int level, int label, struct Village *back);
-void dealwithargs(int argc, char *argv[]);
+void dealwithargs();
 float my_rand(long long idum);
 struct Patient *generate_patient(struct Village *village);
 void put_in_hosp(struct Hosp *hosp, struct Patient *patient);
