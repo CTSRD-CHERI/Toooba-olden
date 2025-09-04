@@ -11,7 +11,7 @@
 
 void dealwithargs() { 
   //if (argc < 4) {
-    max_level = 3;
+    max_level = 5;
     max_time = 15;
     my_seed = 4;
   //} else {
