@@ -1,6 +1,7 @@
 /* For copyright information, see olden_v1.0/COPYRIGHT */
 
-#include <stdlib.h>
+//#include <stdlib.h>
+#include "../../Toooba-mibench2/util.h"
 #include "em3d.h"
 
 #ifdef TORONTO

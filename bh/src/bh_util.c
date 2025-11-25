@@ -6,8 +6,10 @@
  * 	    It's free because it's yours.
  */
 
-#include "stdinc.h"
+//#include "stdinc.h"
 //#include <errno.h>
+
+#include <util.h>
 
 #define A	16807.0
 #define M	2147483647.0

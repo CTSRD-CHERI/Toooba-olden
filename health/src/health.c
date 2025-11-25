@@ -9,7 +9,7 @@
 //#include <math.h>
 #include "health.h"
 //#include <assert.h>
-#include "util.h"
+#include <util.h>
 
 int  max_level;
 long max_time;
@@ -31,7 +31,7 @@ struct Village *alloc_tree(int level, int label, struct Village *back) {
     new->back = back;
     new->label = label;
     new->seed = label * (IQ + my_seed); 
-    new->hosp.personnel = (int)pow(2, level - 1);
+    new->hosp.personnel = 1 << (level - 1);
     new->hosp.free_personnel = new->hosp.personnel;
     new->hosp.num_waiting_patients = 0;
     new->hosp.assess.forward = NULL;
