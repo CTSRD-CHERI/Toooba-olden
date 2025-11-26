@@ -8,7 +8,7 @@ ifeq ($(CHERI),1)
 TOOLCHAIN:=LLVM
 endif
 
-CCDIR   ?= /Users/jonathanwoodruff/cheri/output/sdk/bin
+CCDIR   ?= /home/jdw57/llvm-zcheri/bin
 ifeq ($(TOOLCHAIN),LLVM)
 CC      := $(CCDIR)/clang
 LD      := $(CCDIR)/ld.lld
@@ -23,13 +23,13 @@ LD      := riscv64-unknown-elf-ld
 OBJDUMP := riscv64-unknown-elf-objdump
 OBJCOPY := riscv64-unknown-elf-objcopy
 RISCV_FLAGS += -mcmodel=medany
-LIBS := -lgcc
+LIBS :=
 endif
 
 # Make sure user explicitly defines the target GFE platform.
 ifeq ($(TOOLCHAIN),LLVM)
 ifeq ($(CHERI),1)
-  RISCV_FLAGS += -target riscv64 -march=rv64imafdxcheri -mabi=l64pc128d
+  RISCV_FLAGS += -target riscv64 -march=rv64imafdzcherihybrid -mabi=l64pc128d
 else
   RISCV_FLAGS += -target riscv64 -march=rv64imafdc -mabi=lp64
 endif
@@ -66,6 +66,7 @@ CFLAGS := \
 	-std=gnu99 \
 	-ffast-math \
 	-fno-common \
+	-fno-builtin \
 	-fno-builtin-printf \
 	-I$(COMMON_DIR)
 ASFLAGS := $(CFLAGS)
