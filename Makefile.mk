@@ -31,7 +31,7 @@ ifeq ($(TOOLCHAIN),LLVM)
 ifeq ($(CHERI),1)
   RISCV_FLAGS += -target riscv64 -march=rv64imafdczcherihybrid -mabi=l64pc128d
 else
-  RISCV_FLAGS += -target riscv64 -march=rv64imafdcz -mabi=lp64
+  RISCV_FLAGS += -target riscv64 -march=rv64imafdc -mabi=lp64d
 endif
 else
   RISCV_FLAGS += -march=rv64imafdc -mabi=lp64d
