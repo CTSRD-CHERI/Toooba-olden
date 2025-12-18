@@ -12,6 +12,7 @@
 #include "defs.h"
 #include "code.h"
 #include "util.h"
+#include "bareBench.h"
 
 
 int nbody;

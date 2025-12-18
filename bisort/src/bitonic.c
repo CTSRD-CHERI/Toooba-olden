@@ -4,6 +4,7 @@
 /* UP - 0, DOWN - 1 */
 #include "node.h"   /* Node Definition */
 #include "proc.h"   /* Procedure Types/Nums */
+#include "bareBench.h"
 //#include <stdio.h>
 
 #define CONST_m1 10000
