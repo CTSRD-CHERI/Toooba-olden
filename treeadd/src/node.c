@@ -3,7 +3,9 @@
 /* node.c
  */
 
+#ifndef CHERID_STUDY
 #include "common/timing.h"
+#endif
 
 #ifndef TORONTO
 #include <cm/cmmd.h>
@@ -32,6 +34,7 @@ typedef struct {
     long 	level;
 } startmsg_t;
 
+#ifndef CHERID_STUDY
 int main (int argc, char *argv[])
 {
     tree_t	*root;
@@ -117,6 +120,8 @@ int main (int argc, char *argv[])
 
     exit(0);
 }
+
+#endif /* CHERID_STUDY */
 
 /* TreeAdd:
  */

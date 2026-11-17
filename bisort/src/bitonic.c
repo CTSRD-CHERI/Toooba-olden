@@ -4,7 +4,9 @@
 /* UP - 0, DOWN - 1 */
 #include "node.h"   /* Node Definition */
 #include "proc.h"   /* Procedure Types/Nums */
+#ifndef CHERID_STUDY
 #include "bareBench.h"
+#endif
 //#include <stdio.h>
 
 #define CONST_m1 10000
@@ -13,7 +15,7 @@
 
 int NumNodes, NDim;
 
-int random(int);
+int olden_random(int);
 
 int flag=0,foo=0;
 
@@ -50,11 +52,11 @@ int mult(int p, int q) {
 
 /* Generate the nth random # */
 int skiprand(int seed, int n) {
-  for (; n; n--) seed=random(seed);
+  for (; n; n--) seed=olden_random(seed);
   return seed;
 }
 
-int random(int seed) {
+int olden_random(int seed) {
   return mult(seed,CONST_b)+1;
 }
 
@@ -69,7 +71,7 @@ HANDLE* RandTree(int n, int seed, int node, int level) {
       newnode = node + (1 <<  (NDim-level-1));
     else
       newnode = node;
-    seed = random(seed);
+    seed = olden_random(seed);
     next_val=seed % RANGE;
     NewNode(h,next_val,node);
     f_left.value = RandTree((n/2),seed,newnode,level+1);
@@ -212,7 +214,7 @@ int spr_val,dir;
   HANDLE *r;
   int val;
   /*//printf("bisort %x\n", root);*/
-  if ((root->left == NIL))  /* <---- 8.7% load penalty */
+  if (root->left == NIL)  /* <---- 8.7% load penalty */
     { 
      if (((root->value > spr_val) ^ dir))
         {
@@ -237,6 +239,7 @@ int spr_val,dir;
   return spr_val;
 } 
 
+#ifndef CHERID_STUDY
 int main() {
   HANDLE *h;
   int sval;
@@ -247,7 +250,7 @@ int main() {
   //printf("Bisort with %d size of dim %d\n", n, NDim);
 
   h = RandTree(n,12345768,0,0);
-  sval = random(245867) % RANGE;
+  sval = olden_random(245867) % RANGE;
   if (flag) {
     InOrder(h);
     //printf("%d\n",sval);
@@ -281,3 +284,5 @@ int main() {
 
 
 
+
+#endif /* CHERID_STUDY */
