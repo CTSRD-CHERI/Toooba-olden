@@ -19,6 +19,7 @@ root=Path(__file__).resolve().parent
 a.output=a.output.resolve(); a.output.parent.mkdir(parents=True,exist_ok=True)
 sysroot=a.sdk/'baremetal/baremetal-riscv64-purecap/riscv64-unknown-elf'
 cmd=[str(a.sdk/'bin/clang'),'--target=riscv64-unknown-elf','-march=rv64imafdcxcheri','-mabi=l64pc128d','-mcmodel=medium','-mno-relax','--sysroot='+str(sysroot),'-O2','-g','-ffreestanding','-fno-builtin','-nostdlib','-fuse-ld=lld','-Wl,-T,'+str(root/'test.ld'),'-I'+str(root)]
+cmd+=['-ffile-prefix-map='+str(root.parent)+'=.', '-ffile-prefix-map='+str(a.sdk.resolve())+'=/CHERI_SDK', '-fdebug-compilation-dir=.']
 cmd+=['-DCHERID_STUDY','-DTORONTO','-DLEVELS='+str(a.levels),'-DREPEATS='+str(a.repeats)]
 if a.algorithm_only:cmd+=['-DALGORITHM_ONLY']
 if a.benchmark=='treeadd':cmd+=[str(root/'../treeadd/src/node.c'),str(root/'../treeadd/src/par-alloc.c')]

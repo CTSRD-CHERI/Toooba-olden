@@ -24,7 +24,9 @@ The SDK must contain `bin/clang`, `bin/ld.lld`, resource header
 `cheri_init_globals.h`, and
 `baremetal/baremetal-riscv64-purecap/riscv64-unknown-elf`.
 The startup assembly and linker script are derived from Toooba-mibench2.
-`.bin` outputs are ELF executables, not flat binary images.
+`.bin` outputs are ELF executables, not flat binary images. Build flags map
+source and SDK debug paths to stable names to avoid recording local paths in
+the committed ELF files.
 
 The allocator packs up to 64 objects into each 4-KiB page; the last 64 bytes
 store one ID byte per object. Objects are 16-byte aligned and bounded, with
